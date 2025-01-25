@@ -1,0 +1,49 @@
+.form {
+  min-height: 600px;
+  max-width: 100%;
+  background-color: #fff;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 33% 1fr;
+  gap: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0rem 0.5rem 1.5rem -0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.form__navigation {
+  border-radius: 0.6em;
+  padding: 2rem;
+  background-color: #483eff;
+}
+
+.form__currentStep {
+  border: solid 1px #fff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  width: 2rem;
+  border-radius: 50%;
+}
+
+.form__content {
+  width: 75%;
+  margin-inline: auto;
+  padding-block: 2.5rem 1.25rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.form__actions {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form__actions > button:last-child {
+  margin-inline-start: auto;
+}

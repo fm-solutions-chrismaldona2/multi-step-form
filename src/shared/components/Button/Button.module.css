@@ -1,0 +1,37 @@
+.button {
+  --txt-color: #1e1e1e;
+  --bg-color: #fff;
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 400;
+  transition: scale 0.35s ease, background-color 0.35s ease, color 0.35s ease;
+}
+
+.button--primary {
+  --txt-color: #fff;
+  --bg-color: #03295a;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+  padding: 0.75em 1.6em;
+  border-radius: 0.5em;
+}
+
+.button--secondary {
+  --txt-color: #8f8f8f;
+  color: var(--txt-color);
+  font-weight: 500;
+}
+
+.button--primary:hover {
+  background-color: hsl(from var(--bg-color) h s l / 0.75);
+}
+
+.button--secondary:hover {
+  color: hsl(from var(--txt-color) h s l / 0.75);
+}
+
+.button:active {
+  scale: 0.935;
+}

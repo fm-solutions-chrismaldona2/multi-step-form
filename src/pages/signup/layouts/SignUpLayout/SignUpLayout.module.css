@@ -1,0 +1,10 @@
+.main {
+  min-height: 100vh;
+  padding-block: max(4rem, 8vw);
+  display: grid;
+  grid-template-columns: min(80%, 1000px);
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--clr-blue-50, #eef5ff);
+}
