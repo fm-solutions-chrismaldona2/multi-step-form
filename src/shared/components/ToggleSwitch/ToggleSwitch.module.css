@@ -1,0 +1,16 @@
+.toggle__container {
+  background-color: #042859;
+  padding: 0.3rem;
+  display: flex;
+  border-radius: 1em;
+  width: 3rem;
+  cursor: pointer;
+  border: none;
+}
+
+.toggle {
+  background-color: #fff;
+  height: 1rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}

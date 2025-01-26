@@ -25,11 +25,11 @@
 }
 
 .button--primary:hover {
-  background-color: hsl(from var(--bg-color) h s l / 0.75);
+  background-color: hsl(from var(--bg-color) h s l / 0.9);
 }
 
 .button--secondary:hover {
-  color: hsl(from var(--txt-color) h s l / 0.75);
+  color: hsl(from var(--txt-color) h s l / 0.9);
 }
 
 .button:active {

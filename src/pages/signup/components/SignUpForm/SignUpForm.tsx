@@ -6,6 +6,7 @@ import PlanSelectionForm from "../PlanSelectionForm/PlanSelectionForm";
 import AddonsSelectionForm from "../AddonsSelectionForm/AddonsSelectionForm";
 import SummaryStep from "../SummaryStep/SummaryStep";
 import { FormEvent } from "react";
+import { SidebarBackground } from "@/shared/components/SvgIllustrations/SvgIllustrations";
 
 const SignUpForm = () => {
   const { step, currentStepIndex, isFirstStep, isLastStep, prev, next } =
@@ -25,6 +26,7 @@ const SignUpForm = () => {
     <div className={styles.form}>
       <aside className={styles.form__navigation}>
         <span className={styles.form__currentStep}>{currentStepIndex + 1}</span>
+        <SidebarBackground className={styles.form__navigationBackground} />
       </aside>
       <form className={styles.form__content} onSubmit={handleSubmit}>
         {step}

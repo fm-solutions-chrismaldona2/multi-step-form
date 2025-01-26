@@ -1,0 +1,48 @@
+.inputBox {
+  padding-inline: 1rem;
+  padding-block: 1.25rem 1rem;
+  border: none;
+  border-radius: 0.35em;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  cursor: pointer;
+  box-shadow: 0 0 1px 1px #d9d8dc;
+  background-color: #fff;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.inputBox--checked {
+  box-shadow: 0 0 1px 1.25px #554f96;
+  background-color: #f8f9fe;
+}
+
+.input {
+  appearance: none;
+}
+
+.plan__icon {
+  margin-bottom: 2.25rem;
+  max-width: 2.75rem;
+}
+.plan__icon svg {
+  width: 100%;
+}
+
+.plan__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0e274f;
+}
+
+.plan__price {
+  font-size: 0.95rem;
+  color: #afafaf;
+}
+
+.plan__free {
+  font-size: 0.9rem;
+  color: #0e274f;
+  font-weight: 500;
+}
