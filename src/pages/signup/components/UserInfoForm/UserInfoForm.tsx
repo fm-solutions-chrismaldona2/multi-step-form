@@ -12,21 +12,21 @@ const UserInfoForm = () => {
         id="name"
         placeholder="e.g. Stephen King"
         autoFocus
-        required
+        // required
       />
       <TextInput
         label="Email Address"
         id="email"
         placeholder="e.g. stephenking@lorem.com"
         type="email"
-        required
+        // required
       />
       <TextInput
         label="Phone Number"
         id="phone"
         placeholder="e.g. +1 234 567 890"
         type="tel"
-        required
+        // required
       />
     </FormWrapper>
   );

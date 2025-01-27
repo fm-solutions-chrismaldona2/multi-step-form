@@ -30,9 +30,15 @@
   width: 100%;
 }
 
+.plan__info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
 .plan__name {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 500;
   color: #0e274f;
 }
 
@@ -45,4 +51,15 @@
   font-size: 0.9rem;
   color: #0e274f;
   font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .inputBox {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .plan__icon {
+    margin: 0;
+  }
 }

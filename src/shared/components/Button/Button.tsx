@@ -9,6 +9,7 @@ interface ButtonProps {
   type?: "submit" | "button" | "reset";
   onClick?: () => void;
   disabled?: boolean;
+  color?: "blue" | "purple";
 }
 
 const Button = memo(
@@ -17,11 +18,16 @@ const Button = memo(
     children,
     type = "button",
     onClick,
+    color = "blue",
     disabled,
   }: ButtonProps) => {
     return (
       <button
-        className={clsx(styles.button, styles[`button--${variant}`])}
+        className={clsx(
+          styles.button,
+          styles[`button--${variant}`],
+          styles[`button--${color}`]
+        )}
         type={type}
         onClick={onClick}
         disabled={disabled}

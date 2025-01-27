@@ -11,7 +11,6 @@
 
 .button--primary {
   --txt-color: #fff;
-  --bg-color: #03295a;
   background-color: var(--bg-color);
   color: var(--txt-color);
   padding: 0.75em 1.6em;
@@ -22,6 +21,14 @@
   --txt-color: #8f8f8f;
   color: var(--txt-color);
   font-weight: 500;
+}
+
+.button--blue {
+  --bg-color: #03295a;
+}
+
+.button--purple {
+  --bg-color: #483eff;
 }
 
 .button--primary:hover {

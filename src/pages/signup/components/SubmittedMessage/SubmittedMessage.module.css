@@ -1,0 +1,28 @@
+.message__container {
+  height: 100%;
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.message__icon {
+  margin-bottom: 0.75em;
+}
+
+.message__title {
+  font-size: 2em;
+  color: #032957;
+  font-weight: 700;
+}
+
+.message {
+  word-break: keep-all;
+  max-width: 70%;
+  font-size: 1em;
+  color: #929292;
+}

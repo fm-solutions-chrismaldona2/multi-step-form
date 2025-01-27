@@ -1,7 +1,6 @@
 .plans {
   max-width: 100%;
   display: flex;
-  align-items: start;
   flex-wrap: wrap;
   gap: 1.25rem;
 }
@@ -11,6 +10,7 @@
 }
 
 .planDuration__selector {
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,4 +30,10 @@
 
 .planDuration__active {
   color: #042859;
+}
+
+@media screen and (max-width: 768px) {
+  .plans {
+    flex-direction: column;
+  }
 }

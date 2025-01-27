@@ -1,0 +1,61 @@
+.item {
+  padding: 1rem 1.5rem;
+  background-color: #fff;
+  box-shadow: 0 0 1px 1px #d9d8dc;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease, box-shadow 0.35s ease;
+}
+
+.item:hover {
+  box-shadow: 0 0 1px 1px #584fbd;
+}
+
+.item--checked {
+  background-color: #f8f9fe;
+  box-shadow: 0 0 1px 1px #584fbd;
+}
+
+.item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 0.5em;
+  row-gap: 0.25em;
+}
+
+.item__generalInfo {
+  min-width: 0;
+}
+
+.item__name,
+.item__description {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item__name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #192f53;
+}
+
+.item__description {
+  font-size: 0.95rem;
+  color: #a1a1a1;
+}
+
+.item__price {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #584fbd;
+}

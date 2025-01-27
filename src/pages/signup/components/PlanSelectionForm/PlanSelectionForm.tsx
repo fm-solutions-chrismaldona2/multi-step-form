@@ -1,6 +1,6 @@
 import FormWrapper from "@/shared/components/FormWrapper/FormWrapper";
-import PlanSelectionItem from "../PlanSelectionItem/PlanSelectionItem";
-import { Plan } from "../PlanSelectionItem/PlanSelectionItem";
+import PlanItem from "../PlanItem/PlanItem";
+import { Plan } from "../PlanItem/PlanItem";
 import { useState } from "react";
 import {
   ArcadeIcon,
@@ -52,7 +52,7 @@ const PlanSelectionForm = () => {
       <div className={styles.plans}>
         {plans.map((plan, index) => {
           return (
-            <PlanSelectionItem
+            <PlanItem
               key={index}
               id={plan.name}
               name="plan"

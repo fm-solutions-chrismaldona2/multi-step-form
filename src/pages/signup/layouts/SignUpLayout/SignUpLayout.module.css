@@ -8,3 +8,10 @@
   gap: 2rem;
   background-color: var(--clr-blue-50, #eef5ff);
 }
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding-block: 0;
+    grid-template-columns: 1fr;
+  }
+}

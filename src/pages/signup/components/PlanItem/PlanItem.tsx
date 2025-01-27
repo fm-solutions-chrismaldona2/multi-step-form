@@ -1,9 +1,9 @@
 import { forwardRef, ReactElement } from "react";
-import styles from "./PlanSelectionItem.module.css";
+import styles from "./PlanItem.module.css";
 import clsx from "clsx";
 import { AnimatePresence, motion, Variants } from "motion/react";
 
-interface PlanSelectionItemProps {
+interface PlanItemProps {
   id: string;
   name: string;
   plan: Plan;
@@ -20,7 +20,7 @@ export interface Plan {
   yearlyFreeMonths: number;
 }
 
-const PlanSelectionItem = forwardRef<HTMLInputElement, PlanSelectionItemProps>(
+const PlanItem = forwardRef<HTMLInputElement, PlanItemProps>(
   ({ id, name, plan, isYearly, isSelected, onChange }, ref) => {
     const price = () => {
       if (isYearly) return `$${plan.yearlyPrice}/yr`;
@@ -46,31 +46,33 @@ const PlanSelectionItem = forwardRef<HTMLInputElement, PlanSelectionItemProps>(
           onChange={onChange}
           required
         />
-        <span className={styles.plan__name}>{plan.name}</span>
-        <span className={styles.plan__price}>{price()}</span>
-        <AnimatePresence>
-          {isYearly && plan.yearlyFreeMonths > 0 && (
-            <motion.span
-              className={styles.plan__free}
-              variants={freeMonthsAnimation}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              transition={{
-                duration: 0.35,
-                type: "spring",
-              }}
-            >
-              {plan.yearlyFreeMonths} months free
-            </motion.span>
-          )}
-        </AnimatePresence>
+        <div className={styles.plan__info}>
+          <span className={styles.plan__name}>{plan.name}</span>
+          <span className={styles.plan__price}>{price()}</span>
+          <AnimatePresence>
+            {isYearly && plan.yearlyFreeMonths > 0 && (
+              <motion.span
+                className={styles.plan__free}
+                variants={freeMonthsAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                transition={{
+                  duration: 0.35,
+                  type: "spring",
+                }}
+              >
+                {plan.yearlyFreeMonths} months free
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
       </label>
     );
   }
 );
 
-export default PlanSelectionItem;
+export default PlanItem;
 
 const freeMonthsAnimation: Variants = {
   hidden: {
