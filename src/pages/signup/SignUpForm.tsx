@@ -1,38 +1,68 @@
 import styles from "./SignUpForm.module.css";
-import { useMultistepForm } from "@/shared/hooks/useMultistepForm";
 import Button from "@/shared/components/Button/Button";
 import UserInfoForm from "./components/UserInfoForm/UserInfoForm";
 import PlanSelectionForm from "./components/PlanSelectionForm/PlanSelectionForm";
 import AddonsSelectionForm from "./components/AddonsSelectionForm/AddonsSelectionForm";
 import ConfirmationStep from "./components/ConfirmationStep/ConfirmationStep";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { SidebarBackground } from "@/shared/components/SvgIllustrations/SvgIllustrations";
 import NavigationStep from "./components/NavigationStep/NavigationStep";
 import SubmittedMessage from "./components/SubmittedMessage/SubmittedMessage";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SignUpData } from "./types";
+import { signUpSchema } from "./schema/signUpSchema";
 
 const SignUpForm = () => {
-  const { step, currentStepIndex, isFirstStep, isLastStep, prev, next, goTo } =
-    useMultistepForm([
-      <UserInfoForm />,
-      <PlanSelectionForm />,
-      <AddonsSelectionForm />,
-      <ConfirmationStep />,
-    ]);
+  const steps = [
+    { form: <UserInfoForm />, fields: ["name", "email", "phone"] },
+    { form: <PlanSelectionForm />, fields: ["plan", "yearly"] },
+    { form: <AddonsSelectionForm />, fields: ["addons"] },
+    { form: <ConfirmationStep /> },
+  ];
 
-  const [submited, setSubmited] = useState(false);
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const isFirstStep = currentStep === 0;
+  const isLastStep = currentStep === steps.length;
 
-  const handleNavigation = (stepIndex: number) => {
-    if (submited) return;
-    goTo(stepIndex);
+  const goTo = async (step: number) => {
+    if (step <= currentStep && !submitted) setCurrentStep(step);
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!isLastStep) {
-      next();
-    } else {
-      setSubmited(true);
+  const methods = useForm<SignUpData>({
+    resolver: zodResolver(signUpSchema),
+    mode: "onTouched",
+    defaultValues: {
+      yearly: false,
+    },
+  });
+
+  const next = async () => {
+    let fields = [];
+
+    if (steps[currentStep].fields) {
+      fields = steps[currentStep].fields;
     }
+    const output = await methods.trigger(fields);
+
+    if (!output) return;
+
+    if (!isLastStep) {
+      if (currentStep === steps.length - 1) {
+        await methods.handleSubmit(processForm)();
+      }
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+
+  const prev = () => {
+    if (!isFirstStep) setCurrentStep((prev) => prev - 1);
+  };
+
+  const processForm: SubmitHandler<SignUpData> = (data) => {
+    console.log(data);
+    setSubmitted(true);
   };
 
   return (
@@ -41,38 +71,40 @@ const SignUpForm = () => {
         <NavigationStep
           number={1}
           name="Your info"
-          onClick={() => handleNavigation(0)}
-          isSelected={currentStepIndex === 0}
+          onClick={() => goTo(0)}
+          isSelected={currentStep === 0}
         />
         <NavigationStep
           number={2}
           name="Select plan"
-          onClick={() => handleNavigation(1)}
-          isSelected={currentStepIndex === 1}
+          onClick={() => goTo(1)}
+          isSelected={currentStep === 1}
         />
         <NavigationStep
           number={3}
           name="Add-ons"
-          onClick={() => handleNavigation(2)}
-          isSelected={currentStepIndex === 2}
+          onClick={() => goTo(2)}
+          isSelected={currentStep === 2}
         />
         <NavigationStep
           number={4}
           name="Summary"
-          onClick={() => handleNavigation(3)}
-          isSelected={currentStepIndex === 3}
+          onClick={() => goTo(3)}
+          isSelected={currentStep === 3}
         />
         <SidebarBackground className={styles.navigator__background} />
       </aside>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        {submited ? (
+      <FormProvider {...methods}>
+        <form
+          className={styles.form}
+          onSubmit={methods.handleSubmit(processForm)}
+        >
           <div className={styles.form__content}>
-            <SubmittedMessage />
+            {submitted ? <SubmittedMessage /> : steps[currentStep].form}
           </div>
-        ) : (
-          <>
-            <div className={styles.form__content}>{step}</div>
+
+          {submitted || (
             <div className={styles.form__actions}>
               {isFirstStep || (
                 <Button onClick={prev} variant="secondary">
@@ -81,16 +113,17 @@ const SignUpForm = () => {
               )}
 
               <Button
-                type="submit"
                 variant="primary"
+                onClick={next}
+                type={(isLastStep && "submit") || "button"}
                 color={(isLastStep && "purple") || "blue"}
               >
                 {isLastStep ? "Confirm" : "Next Step"}
               </Button>
             </div>
-          </>
-        )}
-      </form>
+          )}
+        </form>
+      </FormProvider>
     </div>
   );
 };

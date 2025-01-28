@@ -1,7 +1,26 @@
 import FormWrapper from "@/shared/components/FormWrapper/FormWrapper";
 import styles from "./ConfirmationStep.module.css";
+import { SignUpData } from "../../types";
+import { useFormContext } from "react-hook-form";
 
-const SummaryStep = () => {
+interface ConfirmationStepProps {
+  onModify?: () => void;
+}
+
+const ConfirmationStep = ({ onModify }: ConfirmationStepProps) => {
+  const { watch } = useFormContext<SignUpData>();
+  const selectedPlan = watch("plan");
+  const selectedAddons = watch("addons");
+  const isYearly = watch("yearly");
+
+  const addonsTotalPrice = selectedAddons.reduce((total, current) => {
+    if (isYearly) return total + current.price.yearly;
+
+    return total + current.price.monthly;
+  }, 0);
+  const totalPrice = isYearly
+    ? `$${selectedPlan.price.yearly + addonsTotalPrice}/yr`
+    : `$${selectedPlan.price.monthly + addonsTotalPrice}/mo`;
   return (
     <FormWrapper
       title="Finishing up"
@@ -11,29 +30,48 @@ const SummaryStep = () => {
         <div className={styles.summary__content}>
           <div className={styles.summary__plan}>
             <div className={styles.plan__info}>
-              <span className={styles.plan__name}>Arcade (Yearly)</span>
-              <button className={styles.plan__changeButton}>Change</button>
+              <span className={styles.plan__name}>
+                {selectedPlan.name} ({isYearly ? "Yearly" : "Monthly"})
+              </span>
+              {onModify && (
+                <button
+                  type="button"
+                  className={styles.plan__changeButton}
+                  onClick={onModify}
+                >
+                  Change
+                </button>
+              )}
             </div>
-            <span className={styles.plan__price}>$90/yr</span>
+            <span className={styles.plan__price}>
+              $
+              {isYearly
+                ? `${selectedPlan.price.yearly}/yr`
+                : `${selectedPlan.price.monthly}/mo`}
+            </span>
           </div>
           <div className={styles.summary__addons}>
-            <div className={styles.addon}>
-              <span className={styles.addon__name}>Online service</span>
-              <span className={styles.addon__price}>+$10/yr</span>
-            </div>
-            <div className={styles.addon}>
-              <span className={styles.addon__name}>Larger storage</span>
-              <span className={styles.addon__price}>+$20/yr</span>
-            </div>
+            {selectedAddons.map(({ name, price }, index) => {
+              return (
+                <div className={styles.addon} key={index}>
+                  <span className={styles.addon__name}>{name}</span>
+                  <span className={styles.addon__price}>
+                    ${isYearly ? `${price.yearly}/yr` : `${price.monthly}/mo`}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className={styles.summary__footer}>
-          <span className={styles.totalPrice__label}>Total (per year)</span>
-          <span className={styles.totalPrice}>$120/yr</span>
+          <span className={styles.totalPrice__label}>
+            Total (per {isYearly ? "year" : "month"})
+          </span>
+          <span className={styles.totalPrice}>{totalPrice}</span>
         </div>
       </div>
     </FormWrapper>
   );
 };
 
-export default SummaryStep;
+export default ConfirmationStep;

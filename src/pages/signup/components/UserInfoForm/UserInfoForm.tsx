@@ -1,7 +1,14 @@
 import FormWrapper from "@/shared/components/FormWrapper/FormWrapper";
 import TextInput from "@/shared/components/TextInput/TextInput";
+import { useFormContext } from "react-hook-form";
+import { SignUpData } from "../../types";
 
 const UserInfoForm = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<SignUpData>();
+
   return (
     <FormWrapper
       title="Personal info"
@@ -12,21 +19,24 @@ const UserInfoForm = () => {
         id="name"
         placeholder="e.g. Stephen King"
         autoFocus
-        // required
+        error={errors.name?.message}
+        {...register("name")}
       />
       <TextInput
         label="Email Address"
         id="email"
         placeholder="e.g. stephenking@lorem.com"
         type="email"
-        // required
+        error={errors.email?.message}
+        {...register("email")}
       />
       <TextInput
         label="Phone Number"
         id="phone"
         placeholder="e.g. +1 234 567 890"
         type="tel"
-        // required
+        error={errors.phone?.message}
+        {...register("phone")}
       />
     </FormWrapper>
   );

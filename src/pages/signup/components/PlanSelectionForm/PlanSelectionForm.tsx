@@ -1,7 +1,5 @@
 import FormWrapper from "@/shared/components/FormWrapper/FormWrapper";
 import PlanItem from "../PlanItem/PlanItem";
-import { Plan } from "../PlanItem/PlanItem";
-import { useState } from "react";
 import {
   ArcadeIcon,
   AdvancedIcon,
@@ -9,39 +7,53 @@ import {
 } from "@/shared/components/SvgIcons/SvgIcons";
 import styles from "./PlanSelectionForm.module.css";
 import ToggleSwitch from "@/shared/components/ToggleSwitch/ToggleSwitch";
+import { Plan, SignUpData } from "../../types";
+import { useFormContext } from "react-hook-form";
 
 const plans: Plan[] = [
   {
     icon: <ArcadeIcon />,
+    id: "arcade",
     name: "Arcade",
-    monthlyPrice: 9,
-    yearlyPrice: 9,
+    price: {
+      monthly: 9,
+      yearly: 90,
+    },
     yearlyFreeMonths: 2,
   },
   {
     icon: <AdvancedIcon />,
+    id: "advanced",
     name: "Advanced",
-    monthlyPrice: 12,
-    yearlyPrice: 120,
+    price: {
+      monthly: 12,
+      yearly: 120,
+    },
     yearlyFreeMonths: 2,
   },
   {
     icon: <ProIcon />,
+    id: "pro",
     name: "Pro",
-    monthlyPrice: 15,
-    yearlyPrice: 150,
+    price: {
+      monthly: 15,
+      yearly: 150,
+    },
     yearlyFreeMonths: 2,
   },
 ];
 
 const PlanSelectionForm = () => {
-  const [isYearly, setIsYearly] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<string>("");
+  const { setValue, watch } = useFormContext<SignUpData>();
 
-  const handleDurationChange = () => setIsYearly((prev) => !prev);
+  const selectedPlan = watch("plan");
+  const handlePlanChange = (plan: Plan) => {
+    setValue("plan", plan, { shouldValidate: true });
+  };
 
-  const handlePlanChange = (planName: string) => {
-    setSelectedPlan(planName);
+  const isYearly = watch("yearly", false);
+  const handleDurationChange = () => {
+    setValue("yearly", !isYearly);
   };
 
   return (
@@ -50,16 +62,14 @@ const PlanSelectionForm = () => {
       description="You have the option of monthly or yearly billing."
     >
       <div className={styles.plans}>
-        {plans.map((plan, index) => {
+        {plans.map((data, index) => {
           return (
             <PlanItem
               key={index}
-              id={plan.name}
-              name="plan"
-              plan={plan}
               isYearly={isYearly}
-              isSelected={selectedPlan === plan.name}
-              onChange={() => handlePlanChange(plan.name)}
+              isSelected={selectedPlan?.id === data.id}
+              onChange={() => handlePlanChange(data)}
+              {...data}
             />
           );
         })}
@@ -70,7 +80,7 @@ const PlanSelectionForm = () => {
           className={`${styles.planDuration} ${
             !isYearly && styles["planDuration__active"]
           }`}
-          onClick={() => setIsYearly(false)}
+          onClick={() => setValue("yearly", false)}
         >
           Monthly
         </span>
@@ -83,7 +93,7 @@ const PlanSelectionForm = () => {
           className={`${styles.planDuration} ${
             isYearly && styles["planDuration__active"]
           }`}
-          onClick={() => setIsYearly(true)}
+          onClick={() => setValue("yearly", true)}
         >
           Yearly
         </span>

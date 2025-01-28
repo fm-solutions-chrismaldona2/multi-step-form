@@ -15,9 +15,15 @@
   box-shadow: 0 0 1px 1px #d9d8dc;
   border-radius: 0.35em;
   transition: box-shadow 0.35s ease;
-  color: #062752;
   font-size: 1rem;
   font-weight: 700;
+  color: #062752;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #052e62;
 }
 
 .input:focus {

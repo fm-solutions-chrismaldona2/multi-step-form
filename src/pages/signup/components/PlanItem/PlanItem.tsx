@@ -1,31 +1,21 @@
-import { forwardRef, ReactElement } from "react";
+import { forwardRef } from "react";
 import styles from "./PlanItem.module.css";
 import clsx from "clsx";
 import { AnimatePresence, motion, Variants } from "motion/react";
+import { Plan } from "../../types";
 
-interface PlanItemProps {
-  id: string;
-  name: string;
-  plan: Plan;
+interface PlanItemProps extends Plan {
   isYearly: boolean;
   isSelected: boolean;
   onChange: () => void;
 }
 
-export interface Plan {
-  icon?: ReactElement;
-  name: string;
-  monthlyPrice: number;
-  yearlyPrice: number;
-  yearlyFreeMonths: number;
-}
-
 const PlanItem = forwardRef<HTMLInputElement, PlanItemProps>(
-  ({ id, name, plan, isYearly, isSelected, onChange }, ref) => {
-    const price = () => {
-      if (isYearly) return `$${plan.yearlyPrice}/yr`;
-      return `$${plan.monthlyPrice}/mo`;
-    };
+  (
+    { icon, id, name, price, yearlyFreeMonths, isYearly, isSelected, onChange },
+    ref
+  ) => {
+    const priceStr = isYearly ? `$${price.yearly}/yr` : `$${price.monthly}/mo`;
 
     return (
       <label
@@ -35,22 +25,22 @@ const PlanItem = forwardRef<HTMLInputElement, PlanItemProps>(
           isSelected && styles["inputBox--checked"]
         )}
       >
-        <div className={styles.plan__icon}>{plan.icon}</div>
+        <div className={styles.plan__icon}>{icon}</div>
         <input
           type="radio"
+          name="plan"
           id={id}
-          name={name}
-          value={plan.name}
+          value={name}
           ref={ref}
           className={styles.input}
           onChange={onChange}
           required
         />
         <div className={styles.plan__info}>
-          <span className={styles.plan__name}>{plan.name}</span>
-          <span className={styles.plan__price}>{price()}</span>
+          <span className={styles.plan__name}>{name}</span>
+          <span className={styles.plan__price}>{priceStr}</span>
           <AnimatePresence>
-            {isYearly && plan.yearlyFreeMonths > 0 && (
+            {isYearly && yearlyFreeMonths && (
               <motion.span
                 className={styles.plan__free}
                 variants={freeMonthsAnimation}
@@ -62,7 +52,7 @@ const PlanItem = forwardRef<HTMLInputElement, PlanItemProps>(
                   type: "spring",
                 }}
               >
-                {plan.yearlyFreeMonths} months free
+                {yearlyFreeMonths} months free
               </motion.span>
             )}
           </AnimatePresence>
