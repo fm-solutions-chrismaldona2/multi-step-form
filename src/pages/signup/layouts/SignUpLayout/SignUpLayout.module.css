@@ -1,6 +1,7 @@
 .main {
   min-height: 100dvh;
   display: grid;
+  padding-block: 1rem;
   grid-template-columns: min(95%, 1000px);
   justify-content: center;
   align-items: center;
