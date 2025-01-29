@@ -17,7 +17,7 @@
   color: var(--clr-pink-500, #d05669);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .plans {
     flex-direction: column;
   }

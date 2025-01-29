@@ -52,7 +52,7 @@
   font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .step__description {
     display: none;
   }

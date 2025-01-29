@@ -53,7 +53,7 @@
   font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .inputBox {
     flex-direction: row;
     align-items: center;

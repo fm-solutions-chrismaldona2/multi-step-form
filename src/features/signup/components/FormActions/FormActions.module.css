@@ -12,7 +12,7 @@
   margin-inline-start: auto;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .form__actions {
     padding: 1rem 2rem;
     background-color: #fff;

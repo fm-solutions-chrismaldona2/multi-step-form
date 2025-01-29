@@ -27,7 +27,7 @@
   color: #929292;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .message {
     max-width: 100%;
   }
