@@ -1,6 +1,6 @@
 .toggle__container {
   flex-shrink: 0;
-  background-color: #042859;
+  background-color: var(--clr-blue-900, #03295a);
   padding: 0.3rem;
   display: flex;
   border-radius: 1em;

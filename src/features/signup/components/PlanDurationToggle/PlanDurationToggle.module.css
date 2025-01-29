@@ -1,0 +1,22 @@
+.selector {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  border-radius: 1em;
+  background-color: #f8f9fe;
+}
+
+.plan {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr-gray-400, #8f8f8f);
+  transition: color 0.35s ease;
+  cursor: pointer;
+}
+
+.plan--active {
+  color: var(--clr-blue-900, #03295a);
+}

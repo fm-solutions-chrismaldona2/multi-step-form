@@ -1,5 +1,15 @@
 :root {
+  --clr-white: #fff;
+  --clr-black: #1e1e1e;
+  --clr-gray-200: #d9d8dc;
+  --clr-gray-400: #8f8f8f;
   --clr-blue-50: #eef5ff;
+  --clr-blue-900: #03295a;
+  --clr-pink-400: #f9818d;
+  --clr-pink-500: #d05669;
+  --clr-purple-300: #bbbbfd;
+  --clr-purple-500: #4a41ff;
+  --clr-lightblue-200: #bbe2fe;
 }
 
 body {
@@ -9,6 +19,6 @@ body {
 }
 
 ::selection {
-  background: #f9818d;
+  background: var(--clr-pink-400, #f9818d);
   color: #fff;
 }

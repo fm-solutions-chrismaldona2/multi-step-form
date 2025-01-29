@@ -17,13 +17,13 @@
   min-width: 0;
   line-height: 125%;
   font-size: 2rem;
-  color: #03295a;
+  color: var(--clr-blue-900, #03295a);
 }
 
 .form__description {
   min-width: 0;
   font-size: 1rem;
-  color: #929292;
+  color: var(--clr-gray-400, #8f8f8f);
 }
 
 .form__container {

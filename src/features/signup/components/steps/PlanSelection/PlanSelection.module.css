@@ -1,0 +1,24 @@
+.plans {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.plans > * {
+  flex: 1;
+}
+
+.error {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  color: var(--clr-pink-500, #d05669);
+}
+
+@media screen and (max-width: 768px) {
+  .plans {
+    flex-direction: column;
+  }
+}

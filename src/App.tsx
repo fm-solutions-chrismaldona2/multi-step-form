@@ -2,10 +2,10 @@ import "@/assets/styles/reset.css";
 import "@/assets/styles/global.css";
 import "@/assets/styles/fonts.css";
 
-import SignUp from "@/pages/signup";
+import SignUpPage from "@/pages/signup/SignUpPage";
 
 const App = () => {
-  return <SignUp />;
+  return <SignUpPage />;
 };
 
 export default App;

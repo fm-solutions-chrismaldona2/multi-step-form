@@ -1,0 +1,34 @@
+.message__container {
+  height: 100%;
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.message__icon {
+  margin-bottom: 0.75em;
+}
+
+.message__title {
+  font-size: 2em;
+  color: var(--clr-blue-900, #03295a);
+  font-weight: 700;
+}
+
+.message {
+  word-break: keep-all;
+  max-width: 95%;
+  font-size: 1em;
+  color: #929292;
+}
+
+@media screen and (max-width: 768px) {
+  .message {
+    max-width: 100%;
+  }
+}

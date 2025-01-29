@@ -1,0 +1,40 @@
+.navigator {
+  position: relative;
+  isolation: isolate;
+  border-radius: 0.6em;
+  padding: 2rem;
+  background-color: var(--clr-purple-500, #4a41ff);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navigator__background {
+  pointer-events: none;
+  z-index: -1;
+  position: absolute;
+  bottom: -15%;
+  left: 50%;
+  translate: -52% 0;
+  min-height: 50%;
+  min-width: 120%;
+}
+
+@media screen and (max-width: 768px) {
+  .navigator {
+    border-radius: 0;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.25rem;
+    align-items: start;
+    height: 175px;
+  }
+
+  .navigator__background {
+    z-index: -1;
+    position: absolute;
+    bottom: -150%;
+    min-width: 150%;
+  }
+}
